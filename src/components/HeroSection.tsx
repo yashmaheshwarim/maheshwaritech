@@ -43,7 +43,7 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold text-navy-foreground leading-tight max-w-5xl mx-auto"
           >
-            Engineering Scalable Digital Solutions for{" "}
+            Crafting Scalable Digital Solutions for{" "}
             <motion.span
               className="gradient-text inline-block"
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}

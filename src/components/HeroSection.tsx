@@ -43,7 +43,7 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold text-navy-foreground leading-tight max-w-5xl mx-auto"
           >
-            Engineering Scalable Digital Solutions for{" "}
+            Crafting Scalable Digital Solutions for{" "}
             <motion.span
               className="gradient-text inline-block"
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
@@ -94,21 +94,6 @@ const HeroSection = () => {
           </motion.a>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 rounded-full border-2 border-navy-foreground/30 flex items-start justify-center pt-2"
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-navy-foreground/50" />
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

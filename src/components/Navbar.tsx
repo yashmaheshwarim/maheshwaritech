@@ -34,7 +34,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between h-16 md:h-20">
         <a href="#" className="flex items-center gap-2">
-          <img src={logo} alt="Maheshwari Tech" className="h-10 md:h-12" />
+          <img src={logo} alt="Maheshwari Tech" className="h-8 md:h-10 object-contain drop-shadow-[0_0_8px_hsl(199_80%_50%/0.3)]" style={{ filter: "brightness(1.1) contrast(1.1)" }} />
         </a>
 
         {/* Desktop */}

@@ -13,7 +13,7 @@ const Footer = () => (
         viewport={{ once: true }}
         className="flex items-center gap-3"
       >
-        <img src={logo} alt="Maheshwari Tech" className="h-8 brightness-0 invert" />
+        <img src={logo} alt="Maheshwari Tech" className="h-8 brightness-0 invert drop-shadow-[0_0_6px_hsl(199_80%_50%/0.4)]" />
       </motion.div>
       <p className="text-sm text-navy-foreground/60">
         © {new Date().getFullYear()} Maheshwari Tech. All rights reserved.

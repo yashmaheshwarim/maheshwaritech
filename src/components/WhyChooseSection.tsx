@@ -7,6 +7,7 @@ const reasons = [
   "Long-Term Maintainability",
   "Transparent Pricing",
   "Direct Founder Communication",
+  "Post-Launch Support & Maintenance",
 ];
 
 const WhyChooseSection = () => (

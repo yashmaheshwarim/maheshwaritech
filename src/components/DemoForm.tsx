@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface DemoFormProps {
   defaultSoftware?: string;
 }
 
 const DemoForm = ({ defaultSoftware = "" }: DemoFormProps) => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     businessName: "",
@@ -19,19 +22,51 @@ const DemoForm = ({ defaultSoftware = "" }: DemoFormProps) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    console.log("Form submitted:", formData);
-    alert("Thank you for requesting a demo! We will get back to you shortly.");
-    setFormData({
-      name: "",
-      businessName: "",
-      phone: "",
-      email: "",
-      software: defaultSoftware,
-      message: "",
-    });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/yashhmaheshwari2@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: `New Demo Request: ${formData.software}`,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success === "true") {
+        toast({
+          title: "Success!",
+          description: "Thank you for requesting a demo! We will get back to you shortly.",
+        });
+        setFormData({
+          name: "",
+          businessName: "",
+          phone: "",
+          email: "",
+          software: defaultSoftware,
+          message: "",
+        });
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        variant: "destructive",
+        title: "Oops!",
+        description: "Something went wrong. Please try again or contact us directly.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -134,10 +169,20 @@ const DemoForm = ({ defaultSoftware = "" }: DemoFormProps) => {
 
         <button
           type="submit"
-          className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 group"
+          disabled={isSubmitting}
+          className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          Request Demo
-          <Send size={18} className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          {isSubmitting ? (
+            <>
+              <Loader2 size={18} className="animate-spin" />
+              Sending...
+            </>
+          ) : (
+            <>
+              Request Demo
+              <Send size={18} className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </>
+          )}
         </button>
       </form>
     </div>
